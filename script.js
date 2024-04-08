@@ -21,6 +21,10 @@ const PREFERRED_VALUES = [
     10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82,
 ];
 
+// Add event listener to the "Calculate" button
+document.getElementById("calculateBtn").addEventListener("click", calculateResistor);
+
+// Function to calculate resistor values
 function calculateResistor() {
     const resistance = parseFloat(document.getElementById("resistance").value);
     const tolerance = parseFloat(document.getElementById("tolerance").value);
@@ -45,6 +49,7 @@ function calculateResistor() {
     }
 }
 
+// Function to validate resistor inputs
 function validateResistorInputs(resistance, tolerance) {
     if (isNaN(resistance) || resistance <= 0) {
         throw new Error("Resistance must be a positive number.");
@@ -55,6 +60,7 @@ function validateResistorInputs(resistance, tolerance) {
     }
 }
 
+// Function to calculate resistor bands
 function calculateResistorBands(resistance, tolerance) {
     const firstDigit = parseInt(resistance.toString()[0]);
     const secondDigit = parseInt(resistance.toString()[1]);
@@ -68,6 +74,7 @@ function calculateResistorBands(resistance, tolerance) {
     return [firstBandColor, secondBandColor, multiplierBandColor, toleranceBandColor];
 }
 
+// Function to check if the resistance is a preferred value
 function checkPreferredValue(resistance) {
     // Check if the given resistance is a preferred value
     return PREFERRED_VALUES.includes(Math.round(resistance));
