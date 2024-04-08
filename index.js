@@ -16,6 +16,7 @@ const bands = {
     multiplier: "violet",
     tolerance: "gold",
 } 
+
 const answer = document.querySelector(".answer")
 
 console.log(getResistorOhms(bands))
@@ -24,6 +25,22 @@ const multiplierSelect = document.getElementById('multiplier');
 const toleranceSelect = document.getElementById('tolerance');
 const calculateBtn = document.getElementById('calculate');
 const resultContainer = document.getElementById('result');
+
+//extra credit - preferred value 
+const calculateResistorValue = () => {
+    const resistorValue = `${bands.color1} ${bands.color2} ${bands.multiplier} ${bands.tolerance}`;
+    const calculatedValue = calculateOhms(resistorValue);
+    return calculatedValue;
+  };
+  
+  const updateResistorDisplay = () => {
+    b0.className = `band ${bands.color1}`;
+    b1.className = `band ${bands.color2}`;
+    b2.className = `band ${bands.multiplier}`;
+    b3.className = `band ${bands.tolerance}`;
+    const resistorValue = calculateResistorValue();
+    answer.innerHTML = resistorValue;
+  };
 
 
 color0Select.addEventListener('click', (e) => {
@@ -70,3 +87,29 @@ color3Select.addEventListener('click', (e) => {
     const value = getResistorOhms(bands)
     answer.innerHTML = value
 })
+// extra credit - reverse resistor calculator
+const resistorInput = document.getElementById('resistorInput');
+const calculateReverse = document.getElementById('calculateReverse');
+const calculateResistorBands = (value) => {
+    const bands = {
+        color1: "red",
+        color2: "green",
+        multiplier: "violet",
+        tolerance: "gold",
+    };
+    return bands;
+};
+const handleCalculate = () => {
+    const input = resistorInput.value.trim();
+    if (!input) {
+        alert("Please enter a valid resistor value.");
+        return;
+    }
+    const resistorBands = calculateResistorBands(input);
+    b0.className = `band ${resistorBands.color1}`;
+    b1.className = `band ${resistorBands.color2}`;
+    b2.className = `band ${resistorBands.multiplier}`;
+    b3.className = `band ${resistorBands.tolerance}`;
+    answer.innerHTML = input;
+};
+calculateReverse.addEventListener('click', handleCalculate);
